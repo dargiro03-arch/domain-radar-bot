@@ -45,20 +45,12 @@ def process():
             if not name:
                 continue
 
-            data = {
-                "external_id": generate_id(link),
-                "name": name,
-                "raw_title": title,
-                "description": summary[:200],
-                "source_url": link,
-                "source_type": "WebScan",
-                "rank_score": 50,
-                "tm_risk": "MED",
-                "dom_risk": "MED",
-                "verification_status": "UNVERIFIED",
-                "confidence": 0,
-                "created_at": datetime.utcnow().isoformat()
-            }
+            data = data = {
+    "name": name,
+    "raw_title": title,
+    "source": feed_url,
+    "url": link
+}
 
             r = requests.post(TABLE_URL, json=data, headers=HEADERS)
             print(r.status_code, r.text)

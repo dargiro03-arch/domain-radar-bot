@@ -12,14 +12,14 @@ import feedparser
 SUPABASE_URL = os.environ["SUPABASE_URL"].rstrip("/")
 SUPABASE_KEY = os.environ["SUPABASE_SERVICE_ROLE_KEY"]
 
-TABLE_URL = f"{SUPABASE_URL}/rest/v1/startups"
+TABLE_URL = f"{SUPABASE_URL}/rest/v1/startups?on_conflict=external_id"
 
 HEADERS = {
     "apikey": SUPABASE_KEY,
     "Authorization": f"Bearer {SUPABASE_KEY}",
     "Content-Type": "application/json",
     # IMPORTANT: upsert + on_conflict (lavora con UNIQUE su external_id)
-    "Prefer": "resolution=merge-duplicates,return=representation"
+   "Prefer": "resolution=merge-duplicates,return=minimal"
 }
 
 FEEDS = [
